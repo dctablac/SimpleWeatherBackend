@@ -1,8 +1,7 @@
 from flask import Flask
-from dotenv import dotenv_values
 import requests
+import os
 
-config = dotenv_values('.env')
 
 app = Flask(__name__)
 
@@ -10,7 +9,7 @@ app = Flask(__name__)
 def get_weather():
     api_url = 'http://api.openweathermap.org/data/2.5/forecast?q='
     city = 'Irvine'
-    api_string = api_url + city + '&appid=' + config["API_KEY"]
+    api_string = api_url + city + '&appid=' + os.environ["API_KEY"]
     return requests.get(api_string).json()
 
 @app.route("/")
