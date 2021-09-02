@@ -1,6 +1,7 @@
 from flask import Flask
 from weather import weather_details
 
+
 app = Flask(__name__)
 
 @app.route('/weather/<city>',methods=['GET'])
