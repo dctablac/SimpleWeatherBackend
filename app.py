@@ -1,16 +1,12 @@
 from flask import Flask
-import requests
-import os
+from weather import weather_details
 
 app = Flask(__name__)
 
-@app.route("/weather")
-def get_weather():
-    api_url = 'http://api.openweathermap.org/data/2.5/forecast?q='
-    city = 'Irvine'
-    api_string = api_url + city + '&appid=' + os.environ["API_KEY"]
-    return requests.get(api_string).json()
+@app.route('/weather/<city>',methods=['GET'])
+def get_weather(city):
+    return weather_details(city)
 
-@app.route("/")
+@app.route('/')
 def hello_world():
-    return "HELLO WORLD"
+    return 'Make requests to this url /weather/<city>'
