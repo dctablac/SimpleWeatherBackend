@@ -10,6 +10,7 @@ def weather_details(city: str)->dict:
 
     # # Return necessary information in one JSON
     city_weather_details = {
+        'city': city,
         'current_weather': current_weather_details,
         'seven_day_forecast' : seven_day_forecast_details
     }
