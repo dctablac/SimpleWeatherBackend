@@ -1,6 +1,7 @@
 import requests
 from decouple import config
 
+
 API_KEY = config('API_KEY')
 
 def weather_details(city: str)->dict:
@@ -8,7 +9,7 @@ def weather_details(city: str)->dict:
     current_weather_details = _create_current_weather_details(city)
     seven_day_forecast_details = _create_seven_day_forecast(current_weather_details['lat'], current_weather_details['lon'])
 
-    # # Return necessary information in one JSON
+    # Return necessary information in one JSON
     city_weather_details = {
         'city': city,
         'current_weather': current_weather_details,
