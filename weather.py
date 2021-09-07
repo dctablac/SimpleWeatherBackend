@@ -6,7 +6,14 @@ API_KEY = config('API_KEY')
 
 def weather_details(city: str)->dict:
     ''' Given a city, get the current weather and seven day forecast '''
+    if (city == None):
+        return {'city': None}
+
     current_weather_details = _create_current_weather_details(city)
+    if (current_weather_details == 'City not found'):
+        return {
+            'city': None
+        }
     seven_day_forecast_details = _create_seven_day_forecast(current_weather_details['lat'], current_weather_details['lon'])
 
     # Return necessary information in one JSON
@@ -24,6 +31,8 @@ def _create_current_weather_details(city: str)->dict:
     current_weather_api_base_url = 'http://api.openweathermap.org/data/2.5/weather?'
     current_weather_api_url = '{0}q={1}&appid={2}'.format(current_weather_api_base_url, city, API_KEY)
     current_weather_response = requests.get(current_weather_api_url).json()
+    if (current_weather_response['cod'] == '404'):
+        return 'City not found'
 
     # Compile necessary current temp details
     current_details = {

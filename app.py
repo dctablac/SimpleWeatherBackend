@@ -4,6 +4,7 @@ from weather import weather_details
 
 app = Flask(__name__)
 
+@app.route('/weather/', defaults={'city': None})
 @app.route('/weather/<city>', methods=['GET'])
 @cross_origin(origins=['http://localhost:8080', 'https://dctablac-simple-weather.herokuapp.com'])
 def get_weather(city):
